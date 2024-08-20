@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleweare',
+    'corsheaders.middleware.CorsMiddleware',
     'requestlogs.middleware.RequestLogsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
@@ -76,8 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # APPS
-                'core.context_pressors.context_social',
+                'core.context_processors.context_social',
             ],
         },
     },
@@ -219,3 +218,15 @@ CORS_ALLOW_HEADERS = (
 #CORS_ALLOW_ALL_ORIGINS = True
 #CORS_ALLOW_ALL_CREDENTIALS = False
 
+
+#--- Messages ---#
+
+from django.contrib.messages import constants
+
+MESSAGE_TAGS = {
+    constants.ERROR : 'alert-danger',
+    constants.WARNING : 'alert-warning',
+    constants.DEBUG : 'alert-info',
+    constants.SUCCESS : 'alert-success',
+    constants.INFO : 'alert-info',
+}
