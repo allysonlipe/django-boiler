@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     
+    'base',
     'myapp',
 ]
 
@@ -75,6 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # APPS
+                'core.context_pressors.context_social',
             ],
         },
     },
@@ -97,6 +100,14 @@ DATABASES = {
     }
 }
 
+
+# Caminho para a pasta de logs
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+# criar pasta de logs se ela não existir
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+
+
 REST_FRAMEWORK={
     'EXCEPTION_HANDLER': 'requestlogs.views.exception_handler',
 }
@@ -108,7 +119,7 @@ LOGGING = {
         'requestlogs_to_file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '/tmp/info.log',
+            'filename': os.path.join(LOG_DIR, 'info.log'),  # Caminho para o arquivo de log
         },
     },
     'loggers': {
